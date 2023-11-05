@@ -1,0 +1,124 @@
+paths: 
+
+    data_root: Z:\Alina Kiseleva\manuscript_files
+    save_root: Z:\Alina Kiseleva\manuscript_files
+
+    bad_channels_fname: bad_channels.xlsx
+    bad_channels_hfo_fname: bad_channels_hfo.xlsx
+    localization_fname: iEEG_localization.xlsx
+    
+    template_presentation_path: template.pptx
+
+    stat_results_fnames: 
+        biomarker_areas_fname: areas_channel_names.xlsx
+        resected_electrodes_fname: resected_electrodes.xlsx
+        soz_electrodes_fname: soz_electrodes.xlsx
+        outcomes_fname: outcomes.xlsx
+        final_statistics_fname: final_statistics.xlsx
+        in_out_strengths_fname: in_out_strengths.xlsx
+        rates_stat_fname: rates_stat.xlsx 
+        spike_hfo_coocurrence_fname: spike_hfo_coocurrence.xlsx
+        spike_velocity_fname: spike_velocity.xlsx 
+        travelling_waves_percents_fname: travelling_waves_percents.xlsx
+        onset_numbers_fname: onsets.xlsx
+        num_contacts_fname: num_contacts.xlsx
+
+    patient_numbers:
+        sample_patient: 28
+
+analyse_patients: 
+    - sample_patient
+
+manuscript_figs_settings: 
+    manuscript_figs_saveroot: Z:\Alina Kiseleva\manuscript_files\manuscript_figures
+    manuscript_figs_fontsize: 8 
+    fig_1_settings: 
+        patient: 220907
+        rec_num: 1
+        graph_thr: 99.5
+        spike_t: [22.15, 22.65] 
+        hfo_t: [192.8, 192.95] 
+        prop_t: [8.8, 10.2] 
+        spike_num: 20 
+        hfo_num: 20
+    fig_2_settings: 
+        poor_outcome_patient: 200805
+        good_outcome_patient: 210617
+        graph_thr: 99.2
+    fig_3_settings:
+        overlap_threshold: 100 
+
+    manuscript_patients:
+        - 180127
+        - 181103
+        - 190409
+        - 190615
+        - 200415
+        - 200623
+        - 200709
+        - 200805
+        - 201125
+        - 201204
+        - 210617
+        - 220216
+        - 220602
+        - 220609
+        - 220720
+        - 220817
+        - 220824
+        - 220832
+        - 220907
+        - 221027
+        - 221123
+        - 180330
+        - 180406
+        - 180415
+        - 180424
+        - 180810
+        - 190329
+        - 200702
+        - 200723
+        - 220831
+        - 221124
+
+params: 
+    overwrite_analysis: false
+    prctile_threshold: 95
+    seq_win_s: 0.1
+    flag_results: 'aligned'
+    flag_use_every_second_channel: true
+    graph_thr: 98
+    spike_hfo_cooccur_tolerance: 0.05
+    lower_spike_velocity_thr: 0.01
+
+python:
+    venv_path: D:\iz_maps\venv\Scripts\python
+    cnn_code_path: Z:\Alina Kiseleva\code\pirogov_dataset_code\spike_detection.py
+    stc_plot_code_path: Z:\Alina Kiseleva\code\pirogov_dataset_code\plot_src.py
+    volume_areas_stats: Z:\Alina Kiseleva\code\pirogov_dataset_code\volume_areas_stat.py
+    
+colors:
+    green: [0.3686, 0.6275, 0.4745]
+    bright_green: [0.2941, 0.8588, 0.5255]
+    red: [0.7804, 0.3961, 0.3961]
+    bright_red: [1.0000, 0.4902, 0.4902]
+    gray: [0.4980, 0.4980, 0.4980]
+    light_gray: [0.7451, 0.7451, 0.7451]
+    dark_gray: [0.1569, 0.1569, 0.1569]
+    ra: [0.7686, 0.6784, 0.8627]
+    blue: [0.4471, 0.5765, 0.7961]
+    dark_blue: [0.0510, 0.2196, 0.3059]
+    yellow: [0.9098, 0.7216, 0.1294]
+    purple: [0.9216, 0.3137, 0.6235]
+    teal: [0.2353, 0.4706, 0.5020]
+    olive: [0.4824, 0.5216, 0.3569]
+
+custom_colormap_colors:
+    - [0.0510, 0.2196, 0.3059]
+    - [0.1725, 0.3961, 0.4627]
+    - [0.2353, 0.4706, 0.5020]
+    - [0.3608, 0.5137, 0.4667]
+    - [0.4824, 0.5216, 0.3569]
+    - [0.5961, 0.5412, 0.2588]
+    - [0.9098, 0.7216, 0.1294]
+    - [0.9961, 0.8314, 0.0941]
