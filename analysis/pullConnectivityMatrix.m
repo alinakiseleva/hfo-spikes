@@ -3,8 +3,6 @@ function [connectFull,listFull] = pullConnectivityMatrix(patientStruct,varargin)
 % The seizure onset zone drives state-dependent epileptiform activity in susceptible brain regions. 
 % Clin Neurophysiol. 2019 Sep;130(9):1628-1641. doi: 10.1016/j.clinph.2019.05.032. Epub 2019 Jul 2. PMID: 31325676; PMCID: PMC6730646.
 
-patientNum = num2str(patientStruct.Patient);
-
 p = inputParser;
 paramName = 'state';
 defaultVal = 0;
