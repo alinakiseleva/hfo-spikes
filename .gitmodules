@@ -1,0 +1,9 @@
+[submodule "utils/YamlMatlab"]
+	path = utils/YamlMatlab
+	url = https://github.com/ewiger/yamlmatlab.git
+[submodule "utils/SimpleBrainSurface"]
+	path = utils/SimpleBrainSurface
+	url = https://github.com/robertreingit/simpleBrainSurface.git
+[submodule "utils/Violin-Matlab"]
+	path = utils/Violin-Matlab
+	url = https://github.com/bastibe/Violinplot-Matlab.git
