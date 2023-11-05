@@ -1,7 +1,7 @@
 paths: 
 
-    data_root: data
-    save_root: data
+    data_root: sample_data
+    save_root: sample_data
 
     bad_channels_fname: bad_channels.xlsx
     bad_channels_hfo_fname: bad_channels_hfo.xlsx
@@ -30,7 +30,7 @@ analyse_patients:
     - sample_patient
 
 manuscript_figs_settings: 
-    manuscript_figs_saveroot: data/manuscript_figures
+    manuscript_figs_saveroot: sample_data/manuscript_figures
     manuscript_figs_fontsize: 8 
     fig_1_settings: 
         patient: 220907
