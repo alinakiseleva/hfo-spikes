@@ -1,7 +1,7 @@
 paths: 
 
-    data_root: ''
-    save_root: ''
+    data_root: data
+    save_root: data
 
     bad_channels_fname: bad_channels.xlsx
     bad_channels_hfo_fname: bad_channels_hfo.xlsx
@@ -30,7 +30,7 @@ analyse_patients:
     - sample_patient
 
 manuscript_figs_settings: 
-    manuscript_figs_saveroot: 
+    manuscript_figs_saveroot: data/manuscript_figures
     manuscript_figs_fontsize: 8 
     fig_1_settings: 
         patient: 220907
@@ -92,7 +92,7 @@ params:
     lower_spike_velocity_thr: 0.01
 
 python:
-    venv_path: ''
+    venv_path: 
     cnn_code_path: spike_detection.py
     
 colors:
