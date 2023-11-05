@@ -1,7 +1,7 @@
 paths: 
 
-    data_root: Z:\Alina Kiseleva\manuscript_files
-    save_root: Z:\Alina Kiseleva\manuscript_files
+    data_root: ''
+    save_root: ''
 
     bad_channels_fname: bad_channels.xlsx
     bad_channels_hfo_fname: bad_channels_hfo.xlsx
@@ -30,7 +30,7 @@ analyse_patients:
     - sample_patient
 
 manuscript_figs_settings: 
-    manuscript_figs_saveroot: Z:\Alina Kiseleva\manuscript_files\manuscript_figures
+    manuscript_figs_saveroot: 
     manuscript_figs_fontsize: 8 
     fig_1_settings: 
         patient: 220907
@@ -92,10 +92,8 @@ params:
     lower_spike_velocity_thr: 0.01
 
 python:
-    venv_path: D:\iz_maps\venv\Scripts\python
-    cnn_code_path: Z:\Alina Kiseleva\code\pirogov_dataset_code\spike_detection.py
-    stc_plot_code_path: Z:\Alina Kiseleva\code\pirogov_dataset_code\plot_src.py
-    volume_areas_stats: Z:\Alina Kiseleva\code\pirogov_dataset_code\volume_areas_stat.py
+    venv_path: ''
+    cnn_code_path: spike_detection.py
     
 colors:
     green: [0.3686, 0.6275, 0.4745]
