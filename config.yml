@@ -1,5 +1,6 @@
 paths: 
 
+    edf_root: sample_data
     data_root: sample_data
     save_root: sample_data
 
