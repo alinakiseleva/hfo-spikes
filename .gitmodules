@@ -7,3 +7,6 @@
 [submodule "utils/Violin-Matlab"]
 	path = utils/Violin-Matlab
 	url = https://github.com/bastibe/Violinplot-Matlab.git
+[submodule "utils/fieldtrip"]
+	path = utils/fieldtrip
+	url = https://github.com/fieldtrip/fieldtrip.git
