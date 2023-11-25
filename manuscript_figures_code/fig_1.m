@@ -83,7 +83,7 @@ linewidth = .7;
 %% plotting %%% 
 
 %% Spike row 
-fig1 = figure('units', 'normalized', 'outerposition', [0 0 .8 0.55]); 
+figure('units', 'normalized', 'outerposition', [0 0 .8 0.55]); 
 
 % electrode layout 
 subplot(1, num_subplots, p3); 
@@ -145,12 +145,11 @@ plot_tfr(res_patientStruct, tfr_spike_ch, tfr_spike_time, ...
         'colorbar_str', 'Power'); 
         
 AddLetters2Plots({traces}, {'A'}, NV); 
-
-saveas(fig1, fullfile(article_figs_saveroot, 'fig1_1.png'));    
-
+ 
+print(fullfile(article_figs_saveroot, 'fig1_1.png'), '-dpng', '-r500');
 
 %% HFO row 
-fig1 = figure('units', 'normalized', 'outerposition', [0 0 .8 0.55]);  
+figure('units', 'normalized', 'outerposition', [0 0 .8 0.55]);  
           
 % electrode layout                       
 subplot(1, num_subplots, p3)
@@ -226,12 +225,11 @@ plot_tfr(patientStruct, tfr_hfo_ch, tfr_hfo_time, ...
          'colorbar_str', 'Power');
 
 AddLetters2Plots({traces}, {'B'}, NV); 
-
-saveas(fig1, fullfile(article_figs_saveroot, 'fig1_2.png'));               
-
+            
+print(fullfile(article_figs_saveroot, 'fig1_2.png'), '-dpng', '-r500');
 
 %% Propagation row
-fig1 = figure('units', 'normalized', 'outerposition', [0 0 .8 0.55]); 
+figure('units', 'normalized', 'outerposition', [0 0 .8 0.55]); 
 
 % electtode layout      
 subplot(1, num_subplots, p3)
@@ -316,6 +314,4 @@ plot_graph(thr_adjMatrix, ...
 axis off       
 
 AddLetters2Plots({traces}, {'C'}, NV); 
-
-saveas(fig1, fullfile(article_figs_saveroot, 'fig1_3.png'));     
-
+print(fullfile(article_figs_saveroot, 'fig1_3.png'), '-dpng', '-r500');
