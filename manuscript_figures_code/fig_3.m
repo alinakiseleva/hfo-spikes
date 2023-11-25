@@ -11,7 +11,7 @@ results = [final_stats.SOZ_in_RA, ...
 titles = ["SOZ", "Spikes", "HFO", "Outstrength", "HFO + Outstrength"]; 
 colors = [cmap("dark_blue"); cmap("olive"); cmap("yellow"); cmap("purple"); cmap("teal")]; 
 
-boxplot_fig = figure('units', 'normalized', 'outerposition', [0 0 1 1]); 
+figure('units', 'normalized', 'outerposition', [0 0 1 1]); 
 
 row1 = [];
 
@@ -195,5 +195,6 @@ end
 
 set(gcf, 'InvertHardCopy', 'off');
 set(gcf, 'Color', 'w');
-saveas(boxplot_fig, [article_figs_saveroot + "\fig_3.png"])
+print(fullfile(article_figs_saveroot, 'fig_3.png'), '-dpng', '-r500');
+
 

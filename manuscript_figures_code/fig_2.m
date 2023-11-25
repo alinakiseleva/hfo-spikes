@@ -71,7 +71,7 @@ NV = struct('FontSize', 12, ...
 subplots = reshape([1:24], 3, 8)'; 
 
 % Propagation on electrode layout 
-example_fig = figure('units','normalized','outerposition',[0 0 .7 1]); 
+figure('units','normalized','outerposition',[0 0 .7 1]); 
 
 let_subs = []; 
 i = 1; 
@@ -170,12 +170,11 @@ leg.Position(2) = s.Position(2) - 1.5 * leg.Position(4);
 
 AddLetters2Plots({let_subs(1) let_subs(2)}, {'A', 'B'}, NV); 
 
-saveas(example_fig, fullfile(article_figs_saveroot, 'fig_2_good_poor_example.png'))
-
+print(fullfile(article_figs_saveroot, 'fig_2_good_poor_example.png'), '-dpng', '-r500');
 
 %% Stats figure 
 
-boxplot_fig = figure('units', 'normalized', 'outerposition', [0 0 .4 1]); 
+figure('units', 'normalized', 'outerposition', [0 0 .4 1]); 
 
 % rates stats 
 
@@ -413,7 +412,6 @@ leg = legend(flip(legs), ...
 leg.Position(1) = mean([e.Position(1) + e.Position(3); v.Position(1)]) - leg.Position(3) / 2; 
 leg.Position(2) = e.Position(2) - 1.5 * leg.Position(4);
 
-saveas(boxplot_fig, fullfile(article_figs_saveroot, 'fig_2_stats.png'))
-
+print(fullfile(article_figs_saveroot, 'fig_2_stats.png'), '-dpng', '-r500');
 
 
