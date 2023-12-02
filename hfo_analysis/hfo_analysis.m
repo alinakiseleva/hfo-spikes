@@ -1,95 +1,64 @@
-cd('Z:\Alina Kiseleva\code')
+format compact; 
 
-addpath('pirogov_dataset_code\dirty code')
-addpath('pirogov_dataset_code') 
-addpath('Z:\Tommaso\Matlab Toolboxes\hfEEGAquistionRoutines\McGill Detector') %McGillDetector160422
-addpath('Z:\Victor\code\fieldtrip-20180122') % ft_preprocessing 
+code_folder = pwd; 
+config = ReadYaml(fullfile(code_folder, 'config.yml')); 
 
-format compact
+%% libraries  
+addpath('utils\filedtrip') 
 
-datadir = 'Z:\DATA\MOSCOW\Pirogov\Pirogov DATA\'; 
-resultsdir = 'Z:\Alina Kiseleva\DATA\pirogov_data\'; 
-bad_channels_path = 'Z:\Alina Kiseleva\DATA\pirogov_data\bad_channels_hfo.xlsx'; 
+%% data paths 
 
-patient = 1
-load('FIR_2048.mat')
+datadir = config.paths.edf_root; 
+resultsdir = config.paths.save_root; 
+bad_channels_path = fullfile(config.paths.save_root, config.paths.bad_channels_hfo_fname); 
 
-detector = 1
+%% analysis 
+
+patient = 1; 
+detector = 1; 
 rereference_flag = 1; 
 
-names = ["230610", "230614", "230615"] 
-for name = names
-    folder(patient).name = char(string(name))
-%     HFO_processing(datadir,resultsdir,folder,patient,filter,detector, bad_channels_path, rereference_flag)
-    HFO_results(resultsdir,folder,patient)
-end
+name = config.analyse_patients{1}; 
+paths = build_patient_paths(config, name);
 
+folder(patient).name = num2str(paths.patient); 
+    
 
-for patient = names
-    thesis_hfo_bar_pic
-end 
+% HFO detection 
+HFO_processing(datadir, ...
+               resultsdir, ...
+               folder, ...
+               patient, ...
+               detector, ...
+               bad_channels_path, ...
+               rereference_flag); 
 
+           
+% Build HFO final results            
+HFO_results(resultsdir, ...
+            folder, ...
+            patient); 
+        
+        
+% Build final bar plot for HFO analysis 
+filenames = cellstr(natsort(ls([paths.data_path '\HFO_pat*.mat'])))'; 
+n_recs = length(filenames) - 1; 
 
+filename = filenames{1};   
+load(fullfile(paths.data_path, filename)); 
 
-%% plot HFOs
-close all
+chan_names = [HFOobj(:).label]; 
 
-chosen_channels = [ 12 13 ] 
+bad_channels_hfo = get_bad_channels(paths.bad_channels_hfo_path, paths.list_name, chan_names);
+filename = [ls([paths.data_path '\HFO_*rate*_*.mat']) ls([paths.data_path '\HFO_*result*.mat'])]; 
+load(fullfile(paths.data_path, filename));        
 
-fs = round(HFOobj(chosen_channels(1)).result.duration / HFOobj(chosen_channels(1)).result.time(end)); 
-dt   = 1/fs;
-tt   = HFOobj(1).result.time;
+bar_hfo_plot = build_hfo_bar(N_m_ripple, N_m_FR, N_m_RFR, N_m_THRFR, n_recs, chan_names, bad_channels_hfo); 
 
-labels = {}
-pos = 1
-for ch = chosen_channels
-    labels(pos,1) = HFOobj(ch).label ;
-    pos = pos+1;
-end
+saveas(bar_hfo_plot, fullfile(paths.plot_path, ...
+                              ['HFO_pat_', num2str(patient), '_bar_plot.png'])); 
+                          
+% Plot chosen channels
 
-figure('units','normalized','outerposition',[0 0 1 1])
-ax(1)=  subplot(1,3,1)
-    shift = 1000
-    pos = 1
-    for ch = chosen_channels
-        plot(tt, detrend(HFOobj(ch).result.signal) - shift*pos,'k')
-        hold on
-        pos = pos+1;
-    end
-    ylim([-shift*(pos+1) 0]);
-    set(gca,'YTick',[-shift*(pos-1):shift:-shift],'YTicklabel',flipud(labels))
-
-ax(2)=  subplot(1,3,2)
-    shift = 40
-    pos = 1
-    for ch = chosen_channels
-        N_ev =  (find(HFOobj(ch).result.mark ~=2));
-        plot(tt, HFOobj(ch).result.signalFilt - shift*pos,'k')
-        hold on
-        for evin = N_ev
-            hfo_samplesin = round(HFOobj(ch).result.autoSta(evin)*fs):round(HFOobj(ch).result.autoEnd(evin)*fs);
-            plot(tt(hfo_samplesin), HFOobj(ch).result.signalFilt(hfo_samplesin) - shift*pos, 'r')
-        end
-        pos = pos+1;
-    end
-    ylim([-shift*(pos+1) 0]);
-    set(gca,'YTick',[-shift*(pos-1):shift:-shift],'YTicklabel',flipud(labels))
-
-ax(3)=  subplot(1,3,3)
-    shift = 20
-    pos = 1
-    for ch = chosen_channels
-        N_ev =  (find(HFOobj(ch).result.mark ~=1));
-        plot(tt, HFOobj(ch).result.signalFiltFR - shift*pos,'k')
-        hold on
-        for evin = N_ev
-            hfo_samplesin = round(HFOobj(ch).result.autoSta(evin)*fs):round(HFOobj(ch).result.autoEnd(evin)*fs);
-            plot(tt(hfo_samplesin), HFOobj(ch).result.signalFiltFR(hfo_samplesin) - shift*pos, 'r')
-        end
-        pos = pos+1;
-    end
-    ylim([-shift*(pos+1) 0]);
-    set(gca,'YTick',[-shift*(pos-1):shift:-shift],'YTicklabel',flipud(labels))
-linkaxes(ax,'x')
-addScrollbar( ax, 5  )
-
+[~, chosen_channels] = maxk(sum(N_m_RFR, 1), 3); 
+plot_chosen_hfo_channels(HFOobj, chosen_channels); 
