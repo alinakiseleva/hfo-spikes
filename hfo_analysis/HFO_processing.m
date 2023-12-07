@@ -122,7 +122,7 @@ function HFO_processing(datadir, resultsdir, folder, patient, detector, bad_chan
         end
         
         % vigilant index
-        [vi, ~, sws, num_int] = vigilant_index(datadir,raw,number,list_edf,fs,distalch);
+%         [vi, ~, sws, num_int] = vigilant_index(datadir,raw,number,list_edf,fs,distalch);
 
         for j = unique(sws_time(:,1))'
        
@@ -131,9 +131,9 @@ function HFO_processing(datadir, resultsdir, folder, patient, detector, bad_chan
 
             for i = 1:size(sample,1)
 
-                if exist([resultsdir,patient_folder,'/Block_samples'],'dir') == 0
+                if exist(fullfile(resultsdir,patient_folder,'Block_samples'),'dir') == 0
 
-                    mkdir([resultsdir,patient_folder,'/Block_samples']);
+                    mkdir(fullfile(resultsdir,patient_folder,'Block_samples'));
                     plot = 1;
 
                 else
@@ -146,14 +146,15 @@ function HFO_processing(datadir, resultsdir, folder, patient, detector, bad_chan
                 
                 [~, HFOobj, bar_hfo_plot] = HFO_analysis(filename, label, sample(i,:), filter, fs, plot, bad_channels, rereference_flag);
                 
-                disp([resultsdir,patient_folder,'/Block_samples/', ...
-                'HFO_pat_',num2str(patient),'_block_',num2str(j),'_sample_',num2str(i)])
+                disp(fullfile(resultsdir,patient_folder,'Block_samples', ...
+                ['HFO_pat_',num2str(patient),'_block_',num2str(j),'_sample_',num2str(i)])); 
             
-                save([resultsdir,patient_folder,'/Block_samples/', ...
-                'HFO_pat_',num2str(patient),'_block_',num2str(j),'_sample_',num2str(i)],'HFOobj','-v7.3');
+                save(fullfile(resultsdir,patient_folder,'Block_samples', ...
+                ['HFO_pat_',num2str(patient),'_block_',num2str(j),'_sample_',num2str(i)]), ...
+                'HFOobj', '-v7.3');
 
-                saveas(bar_hfo_plot, [resultsdir,patient_folder,'/Block_samples/', ...
-                'HFO_pat_',num2str(patient),'_block_',num2str(j),'_sample_',num2str(i) '_bar_plot.png'])
+                saveas(bar_hfo_plot, fullfile(resultsdir,patient_folder,'Block_samples', ...
+                ['HFO_pat_',num2str(patient),'_block_',num2str(j),'_sample_',num2str(i) '_bar_plot.png'])); 
                 
                 close(bar_hfo_plot)
             end
@@ -187,8 +188,9 @@ function HFO_processing(datadir, resultsdir, folder, patient, detector, bad_chan
                 
             end
             
-            save([resultsdir,folder(patient).name,'/Block_samples/',...
-                  'HFO_pat_',num2str(patient),'_number_',num2str(se),'_thr'],'HFOobj','-v7.3');
+            save(fullfile(resultsdir,patient_folder,'Block_samples',...
+                  ['HFO_pat_',num2str(patient),'_number_',num2str(se),'_thr']), ...
+                  'HFOobj', '-v7.3');
             
         end
         
