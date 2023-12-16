@@ -23,7 +23,7 @@ function bar_hfo_plot = build_hfo_bar(N_m_ripple, N_m_FR, N_m_RFR, N_m_THRFR, n_
     set(gca,'xticklabel',label,'fontsize',12); 
     if ~isempty(bad_chs)
         ticklabels = get(gca,'xticklabel');
-        for ii = bad_chs'  
+        for ii = bad_chs
             ticklabels{ii} = ['\color[rgb]{.6350,.0780,.1840}' ticklabels{ii}]; 
         end 
         set(gca, 'xticklabel', ticklabels);
@@ -36,7 +36,7 @@ function bar_hfo_plot = build_hfo_bar(N_m_ripple, N_m_FR, N_m_RFR, N_m_THRFR, n_
     set(gca,'xticklabel',label,'fontsize',12); 
     if ~isempty(bad_chs)
         ticklabels = get(gca,'xticklabel');
-        for ii = bad_chs'  
+        for ii = bad_chs
             ticklabels{ii} = ['\color[rgb]{.6350,.0780,.1840}' ticklabels{ii}]; 
         end 
         set(gca, 'xticklabel', ticklabels);
@@ -49,7 +49,7 @@ function bar_hfo_plot = build_hfo_bar(N_m_ripple, N_m_FR, N_m_RFR, N_m_THRFR, n_
     set(gca,'xticklabel',label,'fontsize',12); 
     if ~isempty(bad_chs)
         ticklabels = get(gca,'xticklabel');
-        for ii = bad_chs'  
+        for ii = bad_chs
             ticklabels{ii} = ['\color[rgb]{.6350,.0780,.1840}' ticklabels{ii}]; 
         end 
         set(gca, 'xticklabel', ticklabels);
@@ -62,7 +62,7 @@ function bar_hfo_plot = build_hfo_bar(N_m_ripple, N_m_FR, N_m_RFR, N_m_THRFR, n_
     set(gca,'xticklabel',label,'fontsize',12); 
     if ~isempty(bad_chs)
         ticklabels = get(gca,'xticklabel');
-        for ii = bad_chs'  
+        for ii = bad_chs
             ticklabels{ii} = ['\color[rgb]{.6350,.0780,.1840}' ticklabels{ii}]; 
         end 
         set(gca, 'xticklabel', ticklabels);
