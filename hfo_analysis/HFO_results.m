@@ -11,16 +11,16 @@ function [] = HFO_results(resultsdir,folder,patient)
 
     display(['working on ', num2str(folder(patient).name)]);
 
-    list_mat  = dir([resultsdir,'p' folder(patient).name,'/Block_samples/','*_block_*.mat']);
+    list_mat  = dir(fullfile(resultsdir, ['p' folder(patient).name], 'Block_samples', '*_block_*.mat'));
     list_mat = natsortfiles({list_mat.name}');
             
-    if any(size(dir([resultsdir,folder(patient).name,'/Block_samples/','*_rate_thr.mat']),1)) == 0
+    if any(size(dir([resultsdir,folder(patient).name,'Block_samples','*_rate_thr.mat']),1)) == 0
 
         for se = (length(list_mat)):-1:1
 
             display(['loading HFOobj - ',num2str(se)]);
             
-            load([resultsdir,'p' folder(patient).name,'/Block_samples/',list_mat{se}]);
+            load(fullfile(resultsdir, ['p' folder(patient).name], 'Block_samples', list_mat{se}));
             se;
                                                 
             for ch = 1:length(HFOobj)
@@ -36,15 +36,15 @@ function [] = HFO_results(resultsdir,folder,patient)
         
         display(['saving the rate-thr - ',folder(patient).name]);
         
-        save([resultsdir,'p' folder(patient).name,'/Block_samples/','HFO_pat_',num2str(patient),'_rate_thr.mat'],...
+        save(fullfile(resultsdir, ['p' folder(patient).name], 'Block_samples', ['HFO_pat_',num2str(patient),'_rate_thr.mat']),...
                                               'N_m_ripple','N_m_FR','N_m_RFR','N_m_THRFR');
     else
         
         display(['loading HFOobj and rate-thr - ',folder(patient).name]);
         
-        load([resultsdir,folder(patient).name,'/Block_samples/','HFO_pat_',num2str(patient),'_rate_thr.mat']);
+        load(fullfile(resultsdir, ['p' folder(patient).name], 'Block_samples', ['HFO_pat_',num2str(patient),'_rate_thr.mat']));
         
-        load([resultsdir,folder(patient).name,'/Block_samples/',list_mat{1}]);
+        load(fullfile(resultsdir, ['p' folder(patient).name], 'Block_samples', list_mat{1}));
                                     
     end
 

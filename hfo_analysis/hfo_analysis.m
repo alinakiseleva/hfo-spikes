@@ -4,10 +4,10 @@ code_folder = pwd;
 config = ReadYaml(fullfile(code_folder, 'config.yml')); 
 
 %% libraries  
-addpath('utils\filedtrip') 
+addpath(fullfile(pwd, 'utils', 'filedtrip'));  
+addpath(fullfile(pwd, 'hfo_analysis')); 
 
 %% data paths 
-
 datadir = config.paths.edf_root; 
 resultsdir = config.paths.save_root; 
 bad_channels_path = fullfile(config.paths.save_root, config.paths.bad_channels_hfo_fname); 
@@ -18,21 +18,26 @@ patient = 1;
 detector = 1; 
 rereference_flag = 1; 
 
-name = config.analyse_patients{1}; 
-paths = build_patient_paths(config, name);
+names = cell2mat(config.analyse_patients); 
 
-folder(patient).name = num2str(paths.patient); 
+for name = names 
     
+    close all
+    
+    paths = build_patient_paths(config, name);
 
-% HFO detection 
-HFO_processing(datadir, ...
-               resultsdir, ...
-               folder, ...
-               patient, ...
-               detector, ...
-               bad_channels_path, ...
-               rereference_flag); 
+    folder(patient).name = num2str(paths.patient); 
 
+
+    % HFO detection 
+    HFO_processing(datadir, ...
+                   resultsdir, ...
+                   folder, ...
+                   patient, ...
+                   detector, ...
+                   bad_channels_path, ...
+                   rereference_flag); 
+end 
            
 % Build HFO final results            
 HFO_results(resultsdir, ...
