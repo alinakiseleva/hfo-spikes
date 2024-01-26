@@ -53,7 +53,8 @@ function HFO_processing(datadir, resultsdir, folder, patient, detector, bad_chan
         for i = 1:length(list_edf)
             hdr = edfread([datadir,raw(number).name,'/Night/',list_edf{i}]); 
             fprintf('\nFile %d, time of the recording %s', i, hdr.starttime);
-            fprintf('\nFile %s, sampling frequency: %d\n', list_edf{i}, round(hdr.frequency(1),4,'significant')); 
+            fprintf('\nFile %s, sampling frequency: %d', list_edf{i}, round(hdr.frequency(1),4,'significant')); 
+            fprintf('\nFile %d, prefilter: %s\n', i, hdr.prefilter{1}); 
         end
         
         % for each patient, transfrom data to find sws
@@ -93,6 +94,8 @@ function HFO_processing(datadir, resultsdir, folder, patient, detector, bad_chan
         else
 
             if exist([datadir,raw(number).name,'/Night/','sws_time.txt'],'file') == 0
+                
+                
                 
                 distalch = distalcontact(label);
                 scalp_EEG_visualizer(datadir,raw,label(distalch)',number, new_fs)

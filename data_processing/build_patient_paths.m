@@ -53,6 +53,14 @@ function paths = build_patient_paths(config, patient, verbose)
     end 
 
     patient_folder = ls(fullfile(data_root, ['p' patient '*'])); 
+    
+    if isempty(patient_folder)
+        patient_folder = ls(fullfile(config.edf_root, ['*' patient '*'])); 
+        if isempty(patient_folder)
+            error('Not found patient folder %s', patient_folder); 
+        end 
+    end 
+    
     data_path = fullfile(data_root, patient_folder, 'Block_samples'); 
 
     %% path with bad channels and localization 
